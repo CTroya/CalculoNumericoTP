@@ -1,5 +1,9 @@
 import numpy as np
-
+import check
+# Verificar si A es definida positiva
+def es_definida_positiva(matriz):
+    return np.all(np.linalg.eigvals(matriz) > 0)
+    
 def gradiente_conjugado(A, b, x0=None, tol=1e-10, max_iter=1000):
     """
     Resuelve el sistema Ax = b usando el método del gradiente conjugado.
@@ -44,11 +48,14 @@ def gradiente_conjugado(A, b, x0=None, tol=1e-10, max_iter=1000):
 
     return x
 
-# Ejemplo de uso
-A = np.array([[4, 1], [1, 3]])
-b = np.array([1, 2])
-x0 = np.array([2, 1])
-
-x = gradiente_conjugado(A, b, x0)
-
+# Ejemplo de uso con una matriz 3x3
+A = np.array([[4, 1, 0, 0,1], [1, 3, 2, 0,1], [0, 2, 3, 1,1], [0, 0, 1, 3,0],[0, 0, 1, 3,0]])
+b = np.array([1, 2, 3, 4,5])
+x0 = np.array([2, 1, 0, 0,0])
+if check.es_definida_positiva(A) and check.es_simetrica(A):
+    x = gradiente_conjugado(A, b, x0)
+else:
+        print("La matriz no es adecuada para el metodo de gradiente.")
+        print(f"Simetria de la matriz: {check.es_simetrica(A)}")
+        print(f"La matriz es definida positiva: {check.es_definida_positiva(A)}")
 print("La solución es:", x)
