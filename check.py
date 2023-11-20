@@ -1,6 +1,5 @@
 import numpy as np
 
-A = np.array([[4, 1, 0, 0, 1], [1, 3, 2, 0, 1], [0, 2, 3, 1, 1], [0, 0, 1, 3, 0], [0, 0, 1, 3, 0]])
 
 # Verificar si A es simétrica
 def es_simetrica(A):
@@ -11,4 +10,3 @@ def es_definida_positiva(A):
         return True
     except np.linalg.LinAlgError:
         return False
-print(es_simetrica(A))
