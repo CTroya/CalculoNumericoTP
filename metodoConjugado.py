@@ -6,7 +6,7 @@ import util
 def es_definida_positiva(matriz):
     return np.all(np.linalg.eigvals(matriz) > 0)
     
-def gradiente_conjugado(A, b, x0=None, tol=1e-10, max_iter=4):
+def gradiente_conjugado(A, b, x0=None, tol=1e-10, max_iter=1000):
     """
     Resuelve el sistema Ax = b usando el método del gradiente conjugado.
 
@@ -49,23 +49,36 @@ def gradiente_conjugado(A, b, x0=None, tol=1e-10, max_iter=4):
         p = r + (rs_new / rs_old) * p
         rs_old = rs_new
 
-    return [x,iter,tol]
+    return [x,iter,np.sqrt(rs_new)]
 
 # Ejemplo de uso con una matriz 3x3
 # A = np.array([[4, 1, 0, 0], [1, 3, 2, 0], [0, 2, 3, 1], [0, 0, 1, 3]])
 
 # b = np.array([1, 2, 3, 4])
-b = np.array([random.randint(1,10), random.randint(1,10), random.randint(1,10),random.randint(1,10)])
-x0 = np.array([2, 1, 0, 0])
-A = util.generar_matriz_simetrica_positiva_definida(len(b))
+# b = np.array([random.randint(1,10), random.randint(1,10), random.randint(1,10),random.randint(1,10)])
+
+# x0 = np.array([2, 1, 0, 0])
+# A = util.generar_matriz_simetrica_positiva_definida(len(b))
+
+
+# #Caso 1
+# b = np.array([24,30,-24])
+# A  = np.array([[4,3,0]
+#               ,[3,4,-1]
+#               ,[0,-1,4]])
+
+
+#Caso 2
+A= np.array([[0.2,0.1,1,1,0],[0.1,4,-1,1,-1],[1,-1,60,0,-2],[1,1,0,8,4],[0,-1,-2,4,700]])
+b=np.array([1,2,3,4,5])
+
 if check.es_definida_positiva(A) and check.es_simetrica(A):
-    x = gradiente_conjugado(A, b, x0)
+    x = gradiente_conjugado(A, b)
     util.imprimir_sistema(A=A,B=b)
-    print(f"La solución aproximada en {x[1]} iteraciones con un error de {x[2]} iteraciones es:", x[0])
+    print(f"La solución aproximada en {x[1]} iteraciones con un error de {x[2]} es:", x[0])
     xNumPy= np.linalg.solve(A,b)
     print("La solucion real es:",xNumPy)
 else:
         print("La matriz no es adecuada para el metodo de gradiente.")
         print(f"Simetria de la matriz: {check.es_simetrica(A)}")
         print(f"La matriz es definida positiva: {check.es_definida_positiva(A)}")
-
