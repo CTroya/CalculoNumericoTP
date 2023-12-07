@@ -54,6 +54,11 @@ def gradiente_conjugado(A, b, x0=None, tol=1e-10, max_iter=1000):
 # Ejemplo de uso con una matriz 3x3
 # A = np.array([[4, 1, 0, 0], [1, 3, 2, 0], [0, 2, 3, 1], [0, 0, 1, 3]])
 
+"""
+Hemos considerado 3 casos de prueba para el testing de nuestra implementacion
+Para utilizar cada método, descomente las declaraciones de las matrices A y B correspondientes.
+"""
+# #Caso Aleatorio:
 # b = np.array([1, 2, 3, 4])
 # b = np.array([random.randint(1,10), random.randint(1,10), random.randint(1,10),random.randint(1,10)])
 
@@ -68,9 +73,9 @@ def gradiente_conjugado(A, b, x0=None, tol=1e-10, max_iter=1000):
 #               ,[0,-1,4]])
 
 
-#Caso 2
-A= np.array([[0.2,0.1,1,1,0],[0.1,4,-1,1,-1],[1,-1,60,0,-2],[1,1,0,8,4],[0,-1,-2,4,700]])
-b=np.array([1,2,3,4,5])
+# #Caso 2
+#A= np.array([[0.2,0.1,1,1,0],[0.1,4,-1,1,-1],[1,-1,60,0,-2],[1,1,0,8,4],[0,-1,-2,4,700]])
+#b=np.array([1,2,3,4,5])
 
 if check.es_definida_positiva(A) and check.es_simetrica(A):
     x = gradiente_conjugado(A, b)
